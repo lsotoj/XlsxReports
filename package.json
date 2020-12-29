@@ -1,0 +1,24 @@
+{
+  "name": "xlsxreports",
+  "version": "1.0.0",
+  "description": "This app provides the path for build reports that are performed daily",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/lsotoj/XlsxReports.git"
+  },
+  "keywords": [
+    "Xlsx",
+    "excel",
+    "csv"
+  ],
+  "author": "lsotoj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lsotoj/XlsxReports/issues"
+  },
+  "homepage": "https://github.com/lsotoj/XlsxReports#readme"
+}
