@@ -1,6 +1,7 @@
 const csv = require('csvtojson');
 const fs = require('fs');
 const validacion = require('./assets/validacion');
+let siValidos = [];
 
 //DECLARTION OF THE STREAM
 // let readableStream = fs.createReadStream(__dirname + '/parque.csv');
@@ -13,12 +14,8 @@ csv()
 .fromFile(csvFilePath)
 .then((jsonObj) => {
     jsonObj.forEach(elemento => {
-        console.log(elemento);
+        siValidos.push(validacion(elemento));
     });
-    validacion(jsonObj[0]);
-    // fs.writeFile('File.txt', jsonObj, function (err) {
-    //     if (err) throw err;
-    //     console.log('file created');
-    // });
+    //console.log(siValidos);
 });
 
