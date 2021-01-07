@@ -1,21 +1,18 @@
 function validando(objeto) {
-   for(x in objeto) {
-       if(objeto[x] === 'Alpha') {
-           console.log('no pasan');
-           return null;
-       }
+    let pasa = true;
+
+    for(x in objeto) {
+        if(objeto[x] === 'Alpha') {
+           pasa = false;
+        } 
    }
 
-   console.log('si pasan');
-   return objeto;
-    // const {marca, cliente, virtual, velocidad, capa, seguridad,} = objeto;
-    // if(marca === 'AM Communications' || cliente, virtual,velocidad, capa, seguridad === 'Alpha') {
-    //     console.log('no');
-    //     return null;
-    // } else {
-    //     console.log('si');
-    //     return objeto
-    // }
+    if(pasa) {
+        // console.log('pasa');
+        return objeto
+    } else {
+        // console.log('no pasa');
+        return null;
+    }
 }
-
 module.exports = validando;
