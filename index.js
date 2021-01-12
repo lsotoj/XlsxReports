@@ -1,8 +1,10 @@
+console.time();
 const csv = require("csvtojson");
 const fs = require("fs");
 const validacion = require("./assets/validacion");
 const filling = require("./assets/fill.js");
 let elementosValidos = [];
+let arregloFinal = [];
 let countValidos;
 let parqueTotal;
 
@@ -27,8 +29,7 @@ csv()
     jsonObj.forEach(Validadora);
   })
   .then(() => {
-    console.log(parqueTotal);
-    console.log(countValidos);
-    let quitados = parqueTotal - countValidos;
-    console.log("Quitados: " + quitados);
+    arregloFinal = elementosValidos.map(filling);
+    //console.log(arregloFinal);
   });
+console.timeEnd();

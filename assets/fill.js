@@ -122,6 +122,13 @@ const firmwares = {
 };
 
 function llenado(clienteObj) {
-  //   console.log(firmwares["CGA0101D-P15-5-A000-c7410r5713-171108-CCA"].marca);
+  if (clienteObj.marca === "No Marca" || clienteObj.modelo === "No Modelo") {
+    return {
+      ...clienteObj,
+      ...firmwares[clienteObj.firmware],
+    };
+  }
+
+  return clienteObj;
 }
 module.exports = llenado;
