@@ -3,6 +3,7 @@ const csv = require("csvtojson");
 const fs = require("fs");
 const validacion = require("./assets/validacion");
 const filling = require("./assets/fill.js");
+const json2xls = require("json2xls");
 let elementosValidos = [];
 let arregloFinal = [];
 let countValidos;
@@ -30,6 +31,15 @@ csv()
   })
   .then(() => {
     arregloFinal = elementosValidos.map(filling);
-    //console.log(arregloFinal);
-  });
-console.timeEnd();
+    console.log(arregloFinal.length);
+  })
+  .then(() => {
+    let xls = json2xls(arregloFinal);
+    fs.writeFile("parqueInstalado.xlsx", xls, "binary", (err) => {
+      if (err) {
+        console.log("WriteFile: ", err);
+      }
+      console.log("File is saved");
+    });
+  })
+  .then(console.timeEnd());

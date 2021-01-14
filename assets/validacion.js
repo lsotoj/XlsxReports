@@ -5,17 +5,18 @@ function validando(objeto) {
     if (
       (objeto[x] === "Alpha") |
       (objeto[x] === "JDSU") |
-      (objeto[x] === "VEEX")
+      (objeto[x] === "VEEX") |
+      (objeto[x] === "Cheetah Technologies") |
+      (objeto[x] === "Alpha Technologies") |
+      (objeto[x] === "AM Communications")
     ) {
       pasa = false;
     }
   }
 
   if (pasa) {
-    // console.log('pasa');
     return objeto;
   } else {
-    // console.log('no pasa');
     return null;
   }
 }
