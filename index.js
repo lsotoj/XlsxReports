@@ -1,6 +1,8 @@
+"use strict";
 console.time();
 const csv = require("csvtojson");
 const fs = require("fs");
+const Excel = require("exceljs");
 const validacion = require("./assets/validacion");
 const filling = require("./assets/fill.js");
 const json2xls = require("json2xls");
@@ -14,7 +16,7 @@ let parqueTotal;
 // readableStream.setEncoding('UTF8');
 // readableStream.pipe(csv());
 // console.log(readableStream);
-const csvFilePath = __dirname + "/parque.csv";
+const csvFilePath = __dirname + "/parque1.csv";
 
 function Validadora(elemento) {
   const resultado = validacion(elemento);
