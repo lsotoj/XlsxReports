@@ -3,6 +3,8 @@ console.time();
 const csv = require("csvtojson");
 const fs = require("fs");
 const Excel = require("exceljs");
+const express = require("express");
+const bodyParser = require("body-parser");
 const validacion = require("./assets/validacion");
 const filling = require("./assets/fill.js");
 const json2xls = require("json2xls");
@@ -11,12 +13,17 @@ let arregloFinal = [];
 let countValidos;
 let parqueTotal;
 
-//DECLARTION OF THE STREAM
-// let readableStream = fs.createReadStream(__dirname + '/parque.csv');
-// readableStream.setEncoding('UTF8');
-// readableStream.pipe(csv());
-// console.log(readableStream);
 const csvFilePath = __dirname + "/parque1.csv";
+
+const app = express();
+app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/uploadFiles.html");
+});
+
+app.post("/files", (req, res) => {});
 
 function Validadora(elemento) {
   const resultado = validacion(elemento);
@@ -36,12 +43,23 @@ csv()
     console.log(arregloFinal.length);
   })
   .then(() => {
-    let xls = json2xls(arregloFinal);
-    fs.writeFile("parqueInstalado.xlsx", xls, "binary", (err) => {
-      if (err) {
-        console.log("WriteFile: ", err);
-      }
-      console.log("File is saved");
-    });
+    let stream = fs.createWriteStream("parqueInstalado.txt");
+    let cont = 5;
+    while (cont > 0) {
+      stream.write("hola");
+      cont--;
+    }
+    stream.close();
+    //let xls = json2xls(arregloFinal);
+    // fs.writeFile("parqueInstalado.xlsx", xls, "binary", (err) => {
+    //   if (err) {
+    //     console.log("WriteFile: ", err);
+    //   }
+    //   console.log("File is saved");
+    // });
   })
   .then(console.timeEnd());
+
+app.listen(3000, () => {
+  console.log("server escuchando en el puerto 3000");
+});
