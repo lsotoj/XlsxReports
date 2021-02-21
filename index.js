@@ -1,5 +1,4 @@
 "use strict";
-console.time();
 const csv = require("csvtojson");
 const fs = require("fs");
 const Excel = require("exceljs");
@@ -8,14 +7,16 @@ const bodyParser = require("body-parser");
 const validacion = require("./assets/validacion");
 const filling = require("./assets/fill.js");
 const json2xls = require("json2xls");
+const formidable = require("formidable");
+
 let elementosValidos = [];
 let arregloFinal = [];
 let countValidos;
 let parqueTotal;
-
 const csvFilePath = __dirname + "/parque1.csv";
 
 const app = express();
+
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -23,42 +24,47 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/uploadFiles.html");
 });
 
-app.post("/files", (req, res) => {});
+app.post("/files", (req, res) => {
+  let form = formidable.IncomingForm();
 
-function Validadora(elemento) {
-  const resultado = validacion(elemento);
-  if (resultado != null) {
-    countValidos = elementosValidos.push(resultado);
-  }
-}
+  form
+    .parse(req, (err, fields, files) => {})
+    .on("fileBegin", (name, file) => {
+      file.path = "./uploads/" + file.name;
+    })
+    .on("file", (name, file) => {
+      console.log("Uploaded file!");
+      res.sendFile(__dirname + "/public/uploadSuccess.html");
+    });
+});
 
-csv()
-  .fromFile(csvFilePath)
-  .then((jsonObj) => {
-    parqueTotal = jsonObj.length;
-    jsonObj.forEach(Validadora);
-  })
-  .then(() => {
-    arregloFinal = elementosValidos.map(filling);
-    console.log(arregloFinal.length);
-  })
-  .then(() => {
-    let stream = fs.createWriteStream("parqueInstalado.txt");
-    let cont = 5;
-    while (cont > 0) {
-      stream.write("hola");
-      cont--;
-    }
-    stream.close();
-    //let xls = json2xls(arregloFinal);
-    // fs.writeFile("parqueInstalado.xlsx", xls, "binary", (err) => {
-    //   if (err) {
-    //     console.log("WriteFile: ", err);
-    //   }
-    //   console.log("File is saved");
-    // });
-  })
-  .then(console.timeEnd());
+// function Validadora(elemento) {
+//   const resultado = validacion(elemento);
+//   if (resultado != null) {
+//     countValidos = elementosValidos.push(resultado);
+//   }
+// }
+
+// csv()
+//   .fromFile(csvFilePath)
+//   .then((jsonObj) => {
+//     parqueTotal = jsonObj.length;
+//     jsonObj.forEach(Validadora);
+//   })
+//   .then(() => {
+//     arregloFinal = elementosValidos.map(filling);
+//     console.log(arregloFinal.length);
+//   })
+//   .then(() => {
+//     let stream = fs.createWriteStream("parqueInstalado.txt");
+//     let cont = 5;
+//     while (cont > 0) {
+//       stream.write("hola");
+//       cont--;
+//     }
+
+//     stream.close();
+//   });
 
 app.listen(3000, () => {
   console.log("server escuchando en el puerto 3000");

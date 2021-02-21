@@ -6,10 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-        <h1>Hello, this page is to upload the files</h1>
-        <form = action="index.js" method="POST" enctype="multipart/form-data">
-            <input type= 'file' name='parqueCsv'><br>
-            <button type="submit">Submit</button>
+        <h1>Hello, this page is to upload files</h1>
+
+        <form = action="/files" method="POST" enctype="multipart/form-data">
+            <input type= 'file' name='parque'>
+            <button type="submit">Send</button>
         </form>
 
     
