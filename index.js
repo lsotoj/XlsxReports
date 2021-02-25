@@ -38,34 +38,30 @@ app.post("/files", (req, res) => {
     });
 });
 
-// function Validadora(elemento) {
-//   const resultado = validacion(elemento);
-//   if (resultado != null) {
-//     countValidos = elementosValidos.push(resultado);
-//   }
-// }
+function validadora(elemento) {
+  const resultado = validacion(elemento);
+  if (resultado != null) {
+    countValidos = elementosValidos.push(resultado);
+  }
+}
 
-// csv()
-//   .fromFile(csvFilePath)
-//   .then((jsonObj) => {
-//     parqueTotal = jsonObj.length;
-//     jsonObj.forEach(Validadora);
-//   })
-//   .then(() => {
-//     arregloFinal = elementosValidos.map(filling);
-//     console.log(arregloFinal.length);
-//   })
-//   .then(() => {
-//     let stream = fs.createWriteStream("parqueInstalado.txt");
-//     let cont = 5;
-//     while (cont > 0) {
-//       stream.write("hola");
-//       cont--;
-//     }
+csv()
+  .fromFile(csvFilePath)
+  .then((jsonObj) => {
+    parqueTotal = jsonObj.length;
+    console.log(parqueTotal);
+    jsonObj.forEach(validadora);
+  })
+  .then(() => {
+    arregloFinal = elementosValidos.map(filling);
+    console.log(arregloFinal.length);
+  })
+  .then(() => {
+    let stream = fs.createWriteStream("parqueInstalado.txt");
 
-//     stream.close();
-//   });
+    stream.close();
+  });
 
-app.listen(3000, () => {
-  console.log("server escuchando en el puerto 3000");
-});
+// app.listen(3000, () => {
+//   console.log("server escuchando en el puerto 3000");
+// });

@@ -1,4 +1,4 @@
-function validando(objeto) {
+function validacion(objeto) {
   let pasa = true;
 
   for (x in objeto) {
@@ -20,4 +20,5 @@ function validando(objeto) {
     return null;
   }
 }
-module.exports = validando;
+
+module.exports = validacion;
