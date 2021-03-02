@@ -57,9 +57,7 @@ csv()
     console.log(arregloFinal.length);
   })
   .then(() => {
-    let stream = fs.createWriteStream("parqueInstalado.txt");
-
-    stream.close();
+    console.log(arregloFinal);
   });
 
 // app.listen(3000, () => {
